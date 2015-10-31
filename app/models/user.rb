@@ -2,10 +2,10 @@ class User < ActiveRecord::Base
     has_many :videos
     has_many :challenges, through: :videos
     has_many :friendships 
-    has_many :friends, through: :friendships
+    has_many :added_friends, through: :friendships, source: :friend
     #determine whether to encapsulate friends in method or to produce seperate friendship records 
     has_many :friendships_as_friend, class_name: "Friendship", foreign_key: :friend_id
-    has_many :users, through: :friendships_as_friend
+    has_many :inverse_friends, through: :friendships_as_friend, source: :user
     has_many :comments, foreign_key: :commenter_id
     has_one  :inbox
     has_many :inbox_messages, through: :inbox 
@@ -19,6 +19,20 @@ class User < ActiveRecord::Base
     #output should be array of all direct opponents 
     has_many :opponents, through: :challenges
     has_many :replies, foreign_key: :replier_id
+
+
+    def friends 
+        friends = []
+        self.added_friends.each do |added_friend|
+            friends << added_friend 
+        end 
+
+        self.inverse_friends.each do |inverse_friend|
+            friends << inverse_friend
+        end 
+
+        return friends 
+    end 
 
 end
 
