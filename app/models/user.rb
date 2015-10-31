@@ -2,10 +2,10 @@ class User < ActiveRecord::Base
     has_many :videos
     has_many :challenges, through: :videos
     has_many :friendships 
-    has_many :added_friends, through: :friendships, source: :friend
+    has_many :friends, through: :friendships, source: :friend
     #determine whether to encapsulate friends in method or to produce seperate friendship records 
-    has_many :friendships_as_friend, class_name: "Friendship", foreign_key: :friend_id
-    has_many :inverse_friends, through: :friendships_as_friend, source: :user
+    has_many :inverse_friendships, class_name: "Friendship", foreign_key: :friend_id
+    has_many :inverse_friends, through: :inverse_friendships, source: :user
     has_many :comments, foreign_key: :commenter_id
     has_one  :inbox
     has_many :inbox_messages, through: :inbox 
@@ -21,17 +21,17 @@ class User < ActiveRecord::Base
     has_many :replies, foreign_key: :replier_id
 
 
-    def friends 
-        friends = []
-        self.added_friends.each do |added_friend|
-            friends << added_friend 
+    def all_friends 
+        all_friends = []
+        self.friends.each do |friend|
+            all_friends << friend 
         end 
 
         self.inverse_friends.each do |inverse_friend|
-            friends << inverse_friend
+            all_friends << inverse_friend
         end 
 
-        return friends 
+        return all_friends 
     end 
 
 end

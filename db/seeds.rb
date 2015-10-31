@@ -18,6 +18,6 @@ user_4 = User.all[3]
 
 user_1.friendships.create(friend: user_2)
 
-user_1.friendships_as_friend.create(user: user_3)
+user_1.inverse_friendships.create(user: user_3)
 
 
