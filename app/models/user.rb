@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
     has_many :sent_messages, class_name: "Message"
     has_many :votes, foreign_key: :voter_id
     has_many :voted_on_videos, through: :votes
+
     has_many :replies, foreign_key: :replier_id
 
     #test opponents association
