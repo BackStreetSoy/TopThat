@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20151014000755) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "direct_oppenents", force: :cascade do |t|
+  create_table "direct_challenges", force: :cascade do |t|
     t.integer  "opponent_id"
     t.integer  "challenge_id"
     t.datetime "created_at",   null: false
