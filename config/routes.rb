@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root 'sessions#index'
 
   get '/users' => 'users#index'
-  post '/sessions' => 'sessions#create'
+  post '/sessions' => 'sessions#create', defaults: {format: :json}
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

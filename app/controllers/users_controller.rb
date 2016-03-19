@@ -3,7 +3,6 @@ class UsersController < ApplicationController
     
     def index 
         @users = User.all 
-        @hello = "toby"
     end 
 
     def new

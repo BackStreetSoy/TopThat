@@ -1,23 +1,24 @@
 class SessionsController < ApplicationController
-    respond_to :json
-    protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format.json? }
-
    
     def new
     end 
 
 
     def create
-        "hello"
+        puts "hello"
         puts "params: " 
         puts params
         user = User.find_by(email: params[:session][:email].downcase)
 
         if user && user.authenticate(params[:session][:password])
             login(user)
-            
-            puts "!!!!!!!!"
-            user.to_json
+            # @user = user.as_json
+
+            options = {}
+            @user = UserSerializer.new(user, options)
+           
+            respond_as_json(@user)
+
         else 
             flash[:danger] = "invalid email or password!!!!!"
             #redirect
