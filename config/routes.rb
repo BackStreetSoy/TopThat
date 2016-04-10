@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
   root 'sessions#index'
 
-  get '/users' => 'users#index'
+  # resources :users
+  post '/users' => 'users#create', defaults: {format: :json}
   post '/sessions' => 'sessions#create', defaults: {format: :json}
 
   # Example of regular route:

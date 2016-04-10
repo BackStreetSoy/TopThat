@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    respond_to :json, :html
+    # respond_to :json, :html
     
     def index 
         @users = User.all 
@@ -9,10 +9,20 @@ class UsersController < ApplicationController
         @user = User.new 
     end 
     def create 
-        @user = User.new(user_params)
-        if @user.save
-            login(@user)
+        #Research why password isn't showing up
+        #in params[:user]
+        params[:user][:password] = params[:password]
+        # @user = User.new(email: params[:user][:email], username: params[:user][:username], password: params[:password])
+        user = User.new(user_params)
+        if user.save
+            puts user
+            login(user)
+            options = {}
+            @user = UserSerializer.new(user, options)
+
+            respond_as_json(@user)
         else 
+            puts "Failed to save"
             flash[:error] = "incorrect email or password"
             redirect_to root_path
         end 
