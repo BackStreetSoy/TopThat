@@ -28,6 +28,27 @@ class UsersController < ApplicationController
         end 
     end
 
+    def show 
+        @user = User.find(params[:id])
+
+        respond_as_json(@user)
+    end 
+
+    def update
+         @user = User.find(params[:id])
+         @user.update_attributes(user_params)
+
+
+        if @user.save
+            respond_as_json(@user)
+        else
+            puts "Failed to update"
+            flash[:error] = "incorrect email or password"
+            redirect_to root_path
+        end
+
+    end 
+
 
     private 
 
