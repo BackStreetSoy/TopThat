@@ -46,3 +46,9 @@ group :development, :test do
   gem 'spring'
 end
 
+# Use Carrierwave to upload images
+gem 'carrierwave', '0.10.0'
+# Use MiniMagick to risize and crop images
+gem "mini_magick"
+# Use Fog to easily upload images to Amazon S3
+gem "fog"
