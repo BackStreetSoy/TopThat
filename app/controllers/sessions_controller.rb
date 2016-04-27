@@ -1,12 +1,26 @@
 class SessionsController < ApplicationController
+   
+    def new
+    end 
+
+
     def create
         user = User.find_by(email: params[:session][:email].downcase)
+
         if user && user.authenticate(params[:session][:password])
             login(user)
-            #redirect 
+            # @user = user.as_json
+
+            options = {}
+            @user = UserSerializer.new(user, options)
+           
+            respond_as_json(@user)
+
         else 
-            flash[:danger] = "invalid email or password"
+            flash[:danger] = "invalid email or password!!!!!"
             #redirect
+
+            puts flash[:danger]
         end 
     end 
 
