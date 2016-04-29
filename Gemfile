@@ -50,5 +50,6 @@ end
 gem 'carrierwave', '0.10.0'
 # Use MiniMagick to risize and crop images
 gem "mini_magick"
-# Use Fog to easily upload images to Amazon S3
-gem "fog"
+# Use Fog to store and upload images to Amazon S3
+# gem "fog"
+gem "fog-aws"

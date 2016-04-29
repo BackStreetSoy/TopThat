@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
 
+  attr_accessible :avatar
+
   has_many :videos
   has_many :challenges, through: :videos
   has_many :friendships
