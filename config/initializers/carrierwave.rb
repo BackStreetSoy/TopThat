@@ -1,5 +1,5 @@
 CarrierWave.configure do |config|
-  config.fog_provider = 'fog/aws'
+  # config.fog_provider = 'fog/aws'
   config.fog_credentials = {
     provider:              'AWS',
     aws_access_key_id:     'AKIAI7YSCCLFSTIGTAJA',  # if storing key in default fog config file, use ENV['AWS_ACCESS_KEY_ID']
