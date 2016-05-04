@@ -53,3 +53,6 @@ gem "mini_magick"
 # Use Fog to store and upload images to Amazon S3
 # gem "fog"
 gem "fog-aws"
+
+# Use CORS to make cross domain AJAX calls
+gem 'rack-cors', :require => 'rack/cors'
