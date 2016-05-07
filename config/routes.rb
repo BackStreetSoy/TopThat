@@ -5,6 +5,15 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
+  root 'sessions#index'
+
+  # resources :users
+  post '/users' => 'users#create', defaults: {format: :json}
+  post '/sessions' => 'sessions#create', defaults: {format: :json}
+
+  get '/users/:id' => 'users#show', defaults: {format: :json}
+  put '/users/:id' => 'users#update', defaults: {format: :json}
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
