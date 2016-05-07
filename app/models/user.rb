@@ -1,7 +1,12 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  attr_accessible :avatar
+  attr_accessor :avatar
+
+  # has_attached_file :avatar,
+                    #:styles => { :medium => "300x300>", :thumb => "100x100" },
+                    # :default_url => "app/assets/images/default_avatar.png"
+  # validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   has_many :videos
   has_many :challenges, through: :videos

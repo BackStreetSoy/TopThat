@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
     # respond_to :json, :html
-    
-    def index 
-        @users = User.all 
-    end 
+
+    def index
+        @users = User.all
+    end
 
     def new
-        @user = User.new 
-    end 
-    def create 
+        @user = User.new
+    end
+    def create
         #Research why password isn't showing up
         #in params[:user]
         params[:user][:password] = params[:password]
@@ -21,18 +21,18 @@ class UsersController < ApplicationController
             @user = UserSerializer.new(user, options)
 
             respond_as_json(@user)
-        else 
+        else
             puts "Failed to save"
             flash[:error] = "incorrect email or password"
             redirect_to root_path
-        end 
+        end
     end
 
-    def show 
+    def show
         @user = User.find(params[:id])
 
         respond_as_json(@user)
-    end 
+    end
 
     def update
          @user = User.find(params[:id])
@@ -47,12 +47,12 @@ class UsersController < ApplicationController
             redirect_to root_path
         end
 
-    end 
+    end
 
 
-    private 
+    private
 
-    def user_params 
-        params.require(:user).permit(:username, :email, :password, :about_me, :wins, :losses, :ties)
-    end 
+    def user_params
+        params.require(:user).permit(:username, :email, :password, :about_me, :avatar, :wins, :losses, :ties)
+    end
 end
